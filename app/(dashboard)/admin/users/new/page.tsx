@@ -4,6 +4,7 @@ import { isValidEmailAddressFormat } from "@/lib/utils";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { sanitizeFormData } from "@/lib/form-sanitize";
+import apiClient from "@/lib/api";
 
 const DashboardCreateNewUser = () => {
   const [userInput, setUserInput] = useState<{
@@ -36,12 +37,10 @@ const DashboardCreateNewUser = () => {
       }
 
       if (userInput.password.length > 7) {
-        const requestOptions: any = {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
+        apiClient.post(`/api/users`, {
           body: JSON.stringify(sanitizedUserInput),
-        };
-        ap(`/api/users`, requestOptions)
+          headers: { "Content-Type": "application/json" },
+        })
           .then((response) => {
             if(response.status === 201){
               return response.json();

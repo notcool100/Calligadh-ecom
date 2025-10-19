@@ -13,7 +13,7 @@
 import { useWishlistStore } from "@/app/_zustand/wishlistStore";
 import apiClient from "@/lib/api";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaHeartCrack } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
@@ -95,7 +95,7 @@ const AddToWishlistBtn = ({ product, slug }: AddToWishlistBtnProps) => {
     }
   };
 
-  const isInWishlist = async () => {
+  const isInWishlist = useCallback(async () => {
     // sending fetch request to get user id because we will need it for checking whether the product is in wishlist
     if (session?.user?.email) {
       try {
@@ -120,11 +120,11 @@ const AddToWishlistBtn = ({ product, slug }: AddToWishlistBtnProps) => {
         setIsProductInWishlist(false);
       }
     }
-  };
+  }, [session?.user?.email, product?.id]);
 
   useEffect(() => {
     isInWishlist();
-  }, [session?.user?.email, wishlist]);
+  }, [isInWishlist, wishlist]);
 
   return (
     <>
