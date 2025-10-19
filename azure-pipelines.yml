@@ -9,7 +9,6 @@ pool:
 variables:
   nodeVersion: '24.x'
 
-
 stages:
 - stage: BuildFrontend 
   displayName: 'Build Frontend'
@@ -22,25 +21,83 @@ stages:
         versionSpec: '$(nodeVersion)'
       displayName: 'Install Node.js'
     
-    - script: |
-        npm install --legacy-peer-deps
-      displayName: 'Install Frontend Dependencies'
+    - task: DownloadSecureFile@1
+      name: FrontendEnv
+      inputs:
+        secureFile: 'envex'
+      displayName: 'Download Environment File'
     
     - script: |
-        cd fe
+        cp $(FrontendEnv.secureFilePath) .env
         echo "Building frontend application"
+        npm install --legacy-peer-deps
         npm run build
       displayName: 'Build Frontend Application'
     
     - task: ArchiveFiles@2
       inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
         archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
         replaceExistingArchive: true
+      displayName: 'Archive Frontend Files'
     
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
         ArtifactName: 'frontend'
         publishLocation: 'Container'
+      displayName: 'Publish Frontend Artifact'
+
+- stage: BuildBackend 
+  displayName: 'Build Backend'
+  jobs:
+  - job: BuildBackendJob
+    displayName: 'Build Node Server'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '$(nodeVersion)'
+      displayName: 'Install Node.js'
+    
+    - task: DownloadSecureFile@1
+      name: BackendEnv
+      inputs:
+        secureFile: 'envex'
+      displayName: 'Download Environment File'
+    
+    - script: |
+        cd server
+        cp $(BackendEnv.secureFilePath) .env
+        echo "Installing backend dependencies"
+        npm install --legacy-peer-deps
+      displayName: 'Install Backend Dependencies'
+    
+    - script: |
+        cd server
+        npm run prisma:generate
+      displayName: 'Generate Prisma Client'
+    
+    - script: |
+        cd server
+        npm run build
+      displayName: 'Build Backend Application'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/server'
+        includeRootFolder: false
+        archiveType: 'tar'
+        tarCompression: 'gz'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        replaceExistingArchive: true
+      displayName: 'Archive Backend Files'
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        ArtifactName: 'backend'
+        publishLocation: 'Container'
+      displayName: 'Publish Backend Artifact'

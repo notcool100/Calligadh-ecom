@@ -4,13 +4,13 @@ import WishItem from "@/components/WishItem";
 import apiClient from "@/lib/api";
 import { nanoid } from "nanoid";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const WishlistModule = () => {
   const { data: session, status } = useSession();
   const { wishlist, setWishlist } = useWishlistStore();
 
-  const getWishlistByUserId = async (id: string) => {
+  const getWishlistByUserId = useCallback(async (id: string) => {
     const response = await apiClient.get(`/api/wishlist/${id}`, {
       cache: "no-store",
     });
@@ -28,9 +28,9 @@ export const WishlistModule = () => {
     wishlist.map((item: any) => productArray.push({ id: item?.product?.id, title: item?.product?.title, price: item?.product?.price, image: item?.product?.mainImage, slug: item?.product?.slug, stockAvailabillity: item?.product?.inStock }));
 
     setWishlist(productArray);
-  };
+  }, [setWishlist]);
 
-  const getUserByEmail = async () => {
+  const getUserByEmail = useCallback(async () => {
     if (session?.user?.email) {
       apiClient.get(`/api/users/email/${session?.user?.email}`, {
         cache: "no-store",
@@ -40,11 +40,11 @@ export const WishlistModule = () => {
           getWishlistByUserId(data?.id);
         });
     }
-  };
+  }, [session?.user?.email, getWishlistByUserId]);
 
   useEffect(() => {
     getUserByEmail();
-  }, [session?.user?.email, wishlist.length]);
+  }, [getUserByEmail, wishlist.length]);
   return (
     <>
 

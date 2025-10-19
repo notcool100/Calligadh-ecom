@@ -60,3 +60,5 @@
 ::ffff:127.0.0.1 - - [19/Oct/2025:06:08:57 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 429 96 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=fuOkQ4JR userId=anonymous
 ::ffff:127.0.0.1 - - [19/Oct/2025:06:09:11 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 429 96 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=6C5TgQrG userId=anonymous
 ::ffff:127.0.0.1 - - [19/Oct/2025:06:09:27 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 429 96 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=-b-PAyoZ userId=anonymous
+::ffff:127.0.0.1 - - [19/Oct/2025:06:19:42 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 429 96 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=WtVBUtjO userId=anonymous
+::ffff:127.0.0.1 - - [19/Oct/2025:06:20:12 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 429 96 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=c5PFa0gu userId=anonymous
