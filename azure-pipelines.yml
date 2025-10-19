@@ -193,7 +193,7 @@ stages:
         
         # Verify the file was copied
         echo "Environment file contents (first few lines):"
-        head -10 .env.local
+        head -10 .env
       displayName: 'Copy Secure Environment to Frontend'
 
     - script: |
