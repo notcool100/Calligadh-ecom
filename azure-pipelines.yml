@@ -50,3 +50,54 @@ stages:
         ArtifactName: 'frontend'
         publishLocation: 'Container'
       displayName: 'Publish Frontend Artifact'
+
+- stage: BuildBackend 
+  displayName: 'Build Backend'
+  jobs:
+  - job: BuildBackendJob
+    displayName: 'Build Node Server'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '$(nodeVersion)'
+      displayName: 'Install Node.js'
+    
+    - task: DownloadSecureFile@1
+      name: BackendEnv
+      inputs:
+        secureFile: 'envex'
+      displayName: 'Download Environment File'
+    
+    - script: |
+        cd server
+        cp $(BackendEnv.secureFilePath) .env
+        echo "Installing backend dependencies"
+        npm install --legacy-peer-deps
+      displayName: 'Install Backend Dependencies'
+    
+    - script: |
+        cd server
+        npm run prisma:generate
+      displayName: 'Generate Prisma Client'
+    
+    - script: |
+        cd server
+        npm run build
+      displayName: 'Build Backend Application'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/server'
+        includeRootFolder: false
+        archiveType: 'tar'
+        tarCompression: 'gz'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        replaceExistingArchive: true
+      displayName: 'Archive Backend Files'
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        ArtifactName: 'backend'
+        publishLocation: 'Container'
+      displayName: 'Publish Backend Artifact'
