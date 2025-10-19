@@ -28,8 +28,8 @@ model Product {
   customerOrders customer_order_product[]
   Wishlist       Wishlist[]
 
-  merchantId     String
-  merchant       Merchant @relation(fields: [merchantId], references: [id])
+  merchantId     String?
+  merchant       Merchant? @relation(fields: [merchantId], references: [id])
 }
 
 model Image {
@@ -125,7 +125,7 @@ model Merchant {
   id          String   @id @default(uuid())
   name        String
   description String?
-  email       String?
+  email       String? @unique
   phone       String?
   address     String?
   status      String   @default("ACTIVE")
