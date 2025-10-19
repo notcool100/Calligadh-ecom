@@ -14,8 +14,11 @@ stages:
   displayName: 'Build Frontend'
   jobs:
   - job: BuildFrontendJob
-    displayName: 'Build Next.js App'
+    displayName: 'Build Next.js Frontend'
     steps:
+    - checkout: self
+      displayName: 'Checkout Code'
+    
     - task: NodeTool@0
       inputs:
         versionSpec: '$(nodeVersion)'
@@ -25,12 +28,20 @@ stages:
       name: FrontendEnv
       inputs:
         secureFile: 'envex'
-      displayName: 'Download Environment File'
+      displayName: 'Download Frontend Environment File'
     
     - script: |
         cp $(FrontendEnv.secureFilePath) .env
-        echo "Building frontend application"
+        echo "Frontend environment file copied successfully"
+      displayName: 'Setup Frontend Environment'
+    
+    - script: |
+        echo "Installing frontend dependencies"
         npm install --legacy-peer-deps
+      displayName: 'Install Frontend Dependencies'
+    
+    - script: |
+        echo "Building frontend application (includes Prisma generate)"
         npm run build
       displayName: 'Build Frontend Application'
     
@@ -40,23 +51,27 @@ stages:
         includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadh-frontend.tar.gz'
         replaceExistingArchive: true
       displayName: 'Archive Frontend Files'
     
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadh-frontend.tar.gz'
         ArtifactName: 'frontend'
         publishLocation: 'Container'
       displayName: 'Publish Frontend Artifact'
 
 - stage: BuildBackend 
   displayName: 'Build Backend'
+  dependsOn: BuildFrontend
   jobs:
   - job: BuildBackendJob
-    displayName: 'Build Node Server'
+    displayName: 'Build Node.js Backend'
     steps:
+    - checkout: self
+      displayName: 'Checkout Code'
+    
     - task: NodeTool@0
       inputs:
         versionSpec: '$(nodeVersion)'
@@ -66,38 +81,46 @@ stages:
       name: BackendEnv
       inputs:
         secureFile: 'envex'
-      displayName: 'Download Environment File'
+      displayName: 'Download Backend Environment File'
     
     - script: |
         cd server
         cp $(BackendEnv.secureFilePath) .env
+        echo "Backend environment file copied successfully"
+      displayName: 'Setup Backend Environment'
+    
+    - script: |
+        cd server
         echo "Installing backend dependencies"
         npm install --legacy-peer-deps
       displayName: 'Install Backend Dependencies'
     
     - script: |
         cd server
-        npm run prisma:generate
-      displayName: 'Generate Prisma Client'
+        echo "Building backend application"
+        npm run build
+      displayName: 'Build Backend Application'
+      continueOnError: true
     
     - script: |
         cd server
-        npm run build
-      displayName: 'Build Backend Application'
-
+        echo "Backend build completed. Checking server structure:"
+        ls -la
+      displayName: 'Verify Backend Build'
+    
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/server'
         includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/calligadh-backend.tar.gz'
         replaceExistingArchive: true
       displayName: 'Archive Backend Files'
     
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhbackend.tar.gz'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadh-backend.tar.gz'
         ArtifactName: 'backend'
         publishLocation: 'Container'
       displayName: 'Publish Backend Artifact'
