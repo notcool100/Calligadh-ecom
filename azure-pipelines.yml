@@ -28,7 +28,7 @@ stages:
     - task: DownloadSecureFile@1
       name: FrontendEnv
       inputs:
-        secureFile: 'envex'
+        secureFile: 'frontend_env'
       displayName: 'Download Frontend Environment File'
     
     - script: |
@@ -81,7 +81,7 @@ stages:
     - task: DownloadSecureFile@1
       name: BackendEnv
       inputs:
-        secureFile: 'envex'
+        secureFile: 'backend_env'
       displayName: 'Download Backend Environment File'
     
     - script: |
@@ -159,7 +159,7 @@ stages:
     - task: DownloadSecureFile@1
       name: StagingFrontendEnv
       inputs:
-        secureFile: 'envex'
+        secureFile: 'frontend_env'
       displayName: 'Download Staging Frontend Environment File'
 
     - script: |
@@ -228,10 +228,10 @@ stages:
         pm2 delete calligadh-frontend-staging 2>/dev/null || true
         
         # Start frontend with PM2
-        pm2 start npm --name "calligadh-frontend-staging" -- start -- --port 4000
+        pm2 start npm --name "calligadh-frontend-staging" -- start -- --port 8000
         pm2 save
         pm2 startup 2>/dev/null || true
-        echo "Frontend restarted with PM2 on port 4000"
+        echo "Frontend restarted with PM2 on port 8000"
         
         # Show PM2 logs for debugging
         echo "PM2 status after frontend start:"
@@ -251,7 +251,7 @@ stages:
     - task: DownloadSecureFile@1
       name: StagingBackendEnv
       inputs:
-        secureFile: 'envex'
+        secureFile: 'backend_env'
       displayName: 'Download Staging Backend Environment File'
 
     - script: |
