@@ -35,7 +35,7 @@ const Hero = () => {
           </div>
         </div>
         <Image
-          src="/watch for banner.png"
+          src="/heroimage.png"
           width={400}
           height={400}
           alt="smart watch"
