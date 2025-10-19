@@ -9,7 +9,6 @@ pool:
 variables:
   nodeVersion: '24.x'
 
-
 stages:
 - stage: BuildFrontend 
   displayName: 'Build Frontend'
@@ -22,25 +21,32 @@ stages:
         versionSpec: '$(nodeVersion)'
       displayName: 'Install Node.js'
     
-    - script: |
-        npm install --legacy-peer-deps
-      displayName: 'Install Frontend Dependencies'
+    - task: DownloadSecureFile@1
+      name: FrontendEnv
+      inputs:
+        secureFile: 'envex'
+      displayName: 'Download Environment File'
     
     - script: |
-        cd fe
+        cp $(FrontendEnv.secureFilePath) .env
         echo "Building frontend application"
+        npm install --legacy-peer-deps
         npm run build
       displayName: 'Build Frontend Application'
     
     - task: ArchiveFiles@2
       inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
         archiveFile: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
         replaceExistingArchive: true
+      displayName: 'Archive Frontend Files'
     
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/calligadhfrontend.tar.gz'
         ArtifactName: 'frontend'
         publishLocation: 'Container'
+      displayName: 'Publish Frontend Artifact'
