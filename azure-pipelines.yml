@@ -97,16 +97,16 @@ stages:
     
     - script: |
         cd server
-        echo "Building backend application"
-        npm run build
-      displayName: 'Build Backend Application'
-      continueOnError: true
+        echo "Generating Prisma client for backend"
+        npx prisma generate
+      displayName: 'Generate Prisma Client'
     
     - script: |
         cd server
-        echo "Backend build completed. Checking server structure:"
+        echo "Backend installation completed. Server structure:"
         ls -la
-      displayName: 'Verify Backend Build'
+        echo -e "\nBackend ready to run with: npm start"
+      displayName: 'Verify Backend Installation'
     
     - task: ArchiveFiles@2
       inputs:
