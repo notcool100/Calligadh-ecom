@@ -27,7 +27,7 @@ const HeaderTop = () => {
     toast.success("Logout successful!");
   }
   return (
-    <div className="h-10 text-white bg-blue-500 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
+    <div className="h-10 text-white bg-customGray max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
       <div className="flex justify-between h-full max-lg:flex-col max-lg:justify-center max-lg:items-center max-w-screen-2xl mx-auto px-12 max-[573px]:px-0">
         <ul className="flex items-center h-full gap-x-5 max-[370px]:text-sm max-[370px]:gap-x-2">
           <li className="flex items-center gap-x-2 font-semibold">
@@ -40,11 +40,11 @@ const HeaderTop = () => {
           </li>
            <li className="flex items-center gap-x-2 font-semibold">
             <CiShop className="text-white text-xl" />
-            <a href="/shop"><span>Shop</span></a>
+            <Link href="/shop"><span>Shop</span></Link>
           </li>
           <li className="flex items-center gap-x-2 font-semibold">
             <FcAbout className="text-white text-xl" />
-            <a href="/about"><span>about Us</span></a>
+            <Link href="/about"><span>about Us</span></Link>
           </li>
         </ul>
         <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">

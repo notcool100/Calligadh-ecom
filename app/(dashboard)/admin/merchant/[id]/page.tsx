@@ -167,7 +167,7 @@ const handleInputChange = (
           <div className="flex gap-4">
             <Link
               href="/admin/merchant"
-              className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+              className="bg-customGray text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
             >
               Back to Merchants
             </Link>
@@ -247,7 +247,7 @@ const handleInputChange = (
             <div className="md:col-span-2">
               <button 
                 type="submit"
-                className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+                className="bg-customGray text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
               >
                 Save Changes
               </button>

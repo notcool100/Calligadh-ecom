@@ -215,7 +215,7 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
             />
             <label
               htmlFor="file-upload"
-              className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded cursor-pointer transition-colors"
+              className="inline-block bg-customGray hover:bg-blue-600 text-white font-bold py-2 px-6 rounded cursor-pointer transition-colors"
             >
               Select CSV File
             </label>
@@ -231,7 +231,7 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
               className={`w-full py-4 px-6 rounded-lg font-bold text-white text-lg transition-colors ${
                 uploading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-500 hover:bg-blue-600"
+                  : "bg-customGray hover:bg-blue-600"
               }`}
             >
               {uploading ? (
