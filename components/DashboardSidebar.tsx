@@ -1,7 +1,7 @@
 // *********************
 // Role of the component: Sidebar on admin dashboard page
 // Name of the component: DashboardSidebar.tsx
-// Developer: Aleksandar Kuzmanovic
+// Developer: Anjal Joshi
 // Version: 1.0
 // Component call: <DashboardSidebar />
 // Input parameters: no input parameters

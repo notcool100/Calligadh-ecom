@@ -1,7 +1,7 @@
 // *********************
 // Role of the component: Header component
 // Name of the component: Header.tsx
-// Developer: Aleksandar Kuzmanovic
+// Developer: Anjal Joshi
 // Version: 1.0
 // Component call: <Header />
 // Input parameters: no input parameters
