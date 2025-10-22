@@ -1,7 +1,7 @@
 // *********************
 // Role of the component: Wishlist icon with quantity located in the header
 // Name of the component: HeartElement.tsx
-// Developer: Aleksandar Kuzmanovic
+// Developer: Anjal Joshi
 // Version: 1.0
 // Component call: <HeartElement />
 // Input parameters: no input parameters

@@ -2273,3 +2273,21 @@
 ::1 - - [19/Oct/2025:10:24:51 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" reqId=BBi1mZIO userId=anonymous
 ::1 - - [19/Oct/2025:10:24:51 +0000] "OPTIONS /api/notifications/FXlEb90jLoIoNV2GuoT_q/unread-count HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" reqId=kzYINYwi userId=anonymous
 ::1 - - [19/Oct/2025:10:24:51 +0000] "GET /api/notifications/FXlEb90jLoIoNV2GuoT_q/unread-count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" reqId=Y9jDK1y5 userId=anonymous
+::1 - - [22/Oct/2025:17:11:19 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$gt]=1&sort=undefined&page=1 HTTP/1.1" 200 2 "-" "node" reqId=23DlyMyB userId=anonymous
+::1 - - [22/Oct/2025:17:11:29 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=NUgwUsqS userId=anonymous
+::1 - - [22/Oct/2025:17:11:59 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=QIuZ9rUD userId=anonymous
+::1 - - [22/Oct/2025:17:14:06 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$gt]=1&sort=undefined&page=1 HTTP/1.1" 200 2 "-" "node" reqId=eQvnD-C3 userId=anonymous
+::1 - - [22/Oct/2025:17:14:10 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=GvMUvc6f userId=anonymous
+::1 - - [22/Oct/2025:17:20:02 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=mNNLcbOP userId=anonymous
+::1 - - [22/Oct/2025:17:20:36 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=N2F4CA-n userId=anonymous
+::1 - - [22/Oct/2025:17:20:49 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$gt]=1&sort=undefined&page=1 HTTP/1.1" 200 2 "-" "node" reqId=qiH_3K9q userId=anonymous
+::1 - - [22/Oct/2025:17:20:50 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=O7gKpmqd userId=anonymous
+::1 - - [22/Oct/2025:17:20:50 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=6J9pCC_i userId=anonymous
+::1 - - [22/Oct/2025:17:20:53 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=QmfG0kok userId=anonymous
+::1 - - [22/Oct/2025:17:23:24 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=bG_krNcV userId=anonymous
+::1 - - [22/Oct/2025:17:23:50 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$gt]=1&sort=undefined&page=1 HTTP/1.1" 200 2 "-" "node" reqId=cf9NPrHA userId=anonymous
+::1 - - [22/Oct/2025:17:23:52 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=5Yi5M7HU userId=anonymous
+::1 - - [22/Oct/2025:17:24:01 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=_R7ZgNFd userId=anonymous
+::1 - - [22/Oct/2025:17:26:20 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=as6Yq428 userId=anonymous
+::1 - - [22/Oct/2025:17:26:39 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=MHlvyIxE userId=anonymous
+::1 - - [22/Oct/2025:17:27:05 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=m4jUJjYY userId=anonymous
