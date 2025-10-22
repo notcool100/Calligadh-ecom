@@ -123,7 +123,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
                 {notification.title}
               </h3>
               {!notification.isRead && (
-                <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" aria-label="Unread notification" />
+                <div className="w-2 h-2 bg-customGray rounded-full flex-shrink-0" aria-label="Unread notification" />
               )}
             </div>
 

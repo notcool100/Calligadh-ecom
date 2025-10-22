@@ -67,7 +67,7 @@ export default function NewMerchantPage() {
           <h1 className="text-3xl font-bold">Add New Merchant</h1>
           <Link
             href="/admin/merchant"
-            className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+            className="bg-customGray text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
           >
             Cancel
           </Link>
@@ -146,7 +146,7 @@ export default function NewMerchantPage() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition ${
+                className={`bg-customGray text-white px-6 py-2 rounded-md hover:bg-blue-600 transition ${
                   isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
