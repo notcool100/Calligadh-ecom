@@ -40,11 +40,11 @@ const HeaderTop = () => {
           </li>
            <li className="flex items-center gap-x-2 font-semibold">
             <CiShop className="text-white text-xl" />
-            <a href="/shop"><span>Shop</span></a>
+            <Link href="/shop"><span>Shop</span></Link>
           </li>
           <li className="flex items-center gap-x-2 font-semibold">
             <FcAbout className="text-white text-xl" />
-            <a href="/about"><span>about Us</span></a>
+            <Link href="/about"><span>about Us</span></Link>
           </li>
         </ul>
         <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">
