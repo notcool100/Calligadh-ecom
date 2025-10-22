@@ -2288,3 +2288,6 @@
 ::1 - - [22/Oct/2025:17:23:50 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$gt]=1&sort=undefined&page=1 HTTP/1.1" 200 2 "-" "node" reqId=cf9NPrHA userId=anonymous
 ::1 - - [22/Oct/2025:17:23:52 +0000] "GET /api/products?filters[price][$lte]=3000&filters[rating][$gte]=0&filters[inStock][$lte]=1&sort=defaultSort&page=1 HTTP/1.1" 200 307 "-" "node" reqId=5Yi5M7HU userId=anonymous
 ::1 - - [22/Oct/2025:17:24:01 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=_R7ZgNFd userId=anonymous
+::1 - - [22/Oct/2025:17:26:20 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=as6Yq428 userId=anonymous
+::1 - - [22/Oct/2025:17:26:39 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=MHlvyIxE userId=anonymous
+::1 - - [22/Oct/2025:17:27:05 +0000] "GET /api/products HTTP/1.1" 200 307 "-" "node" reqId=m4jUJjYY userId=anonymous

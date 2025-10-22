@@ -1,7 +1,7 @@
 // *********************
 // Role of the component: Simple slider component built with the help of slick-carousel
 // Name of the component: SimpleSlider.tsx
-// Developer: Aleksandar Kuzmanovic
+// Developer: Anjal Joshi
 // Version: 1.0
 // Component call: <SimpleSlider />
 // Input parameters: no input parameters

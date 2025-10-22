@@ -1,7 +1,7 @@
 // *********************
 // Role of the component: Topbar of the header
 // Name of the component: HeaderTop.tsx
-// Developer: Aleksandar Kuzmanovic
+// Developer: Anjal Joshi
 // Version: 1.0
 // Component call: <HeaderTop />
 // Input parameters: no input parameters
@@ -15,7 +15,8 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FaHeadphones } from "react-icons/fa6";
 import { FaRegEnvelope } from "react-icons/fa6";
-import { FaLocationDot } from "react-icons/fa6";
+import { CiShop } from "react-icons/ci";
+import { FcAbout } from "react-icons/fc";
 import { FaRegUser } from "react-icons/fa6";
 
 const HeaderTop = () => {
@@ -38,11 +39,11 @@ const HeaderTop = () => {
             <span>testcalligadh@email.com</span>
           </li>
            <li className="flex items-center gap-x-2 font-semibold">
-            <FaRegEnvelope className="text-white text-xl" />
+            <CiShop className="text-white text-xl" />
             <a href="/shop"><span>Shop</span></a>
           </li>
           <li className="flex items-center gap-x-2 font-semibold">
-            <FaRegEnvelope className="text-white text-xl" />
+            <FcAbout className="text-white text-xl" />
             <a href="/about"><span>about Us</span></a>
           </li>
         </ul>
