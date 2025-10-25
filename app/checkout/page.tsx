@@ -1,5 +1,5 @@
 "use client";
-import { SectionTitle } from "@/components";
+import { SectionTitle, HostedCheckout } from "@/components";
 import { useProductStore } from "../_zustand/store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -25,6 +25,9 @@ const CheckoutPage = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [paymentSessionId, setPaymentSessionId] = useState<string | null>(null);
+  const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
   const { products, total, clearCart } = useProductStore();
   const router = useRouter();
 
@@ -237,34 +240,59 @@ const CheckoutPage = () => {
 
       console.log(" All products added successfully!");
 
-      // Clear form and cart
-      setCheckoutForm({
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        company: "",
-        adress: "",
-        apartment: "",
-        city: "",
-        country: "",
-        postalCode: "",
-        orderNotice: "",
-      });
-      clearCart();
-      
-      // Refresh notification count if user is logged in
+      // Initialize payment session
       try {
-        // This will trigger a refresh of notifications in the background
-        window.dispatchEvent(new CustomEvent('orderCompleted'));
-      } catch (error) {
-        console.log('Note: Could not trigger notification refresh');
+        console.log("🎯 Initializing payment session...");
+        const finalTotal = Math.round(total + total / 5 + 5); // Include taxes and shipping
+        
+        const paymentResponse = await apiClient.post("/api/payment/init-checkout", {
+          amount: finalTotal,
+          currency: 'USD',
+          orderId: orderId,
+          customerEmail: checkoutForm.email,
+          customerName: `${checkoutForm.name} ${checkoutForm.lastname}`,
+          description: `Order #${orderId} - ${products.length} items`
+        });
+
+        if (paymentResponse.ok) {
+          const paymentData = await paymentResponse.json();
+          console.log("✅ Payment session initialized:", paymentData.sessionId);
+          
+          setCurrentOrderId(orderId);
+          setPaymentSessionId(paymentData.sessionId);
+          setShowPayment(true);
+          
+          toast.success("Order created! Please complete payment to finalize your purchase.");
+        } else {
+          throw new Error("Failed to initialize payment");
+        }
+      } catch (paymentError) {
+        console.error("❌ Payment initialization failed:", paymentError);
+        
+        // Still show success for order creation but note payment issue
+        toast.success("Order created successfully!");
+        toast.error("Payment system unavailable. You will be contacted for payment.");
+        
+        // Clear form and cart as fallback
+        setCheckoutForm({
+          name: "",
+          lastname: "",
+          phone: "",
+          email: "",
+          company: "",
+          adress: "",
+          apartment: "",
+          city: "",
+          country: "",
+          postalCode: "",
+          orderNotice: "",
+        });
+        clearCart();
+        
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
       }
-      
-      toast.success("Order created successfully! You will be contacted for payment.");
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
     } catch (error: any) {
       console.error("💥 Error in makePurchase:", error);
       
@@ -330,6 +358,52 @@ const CheckoutPage = () => {
       console.error("💥 Error creating product order:", error);
       throw error;
     }
+  };
+
+  // Payment handlers
+  const handlePaymentComplete = async (paymentResult: any) => {
+    console.log("🎉 Payment completed:", paymentResult);
+    
+    try {
+      // Refresh notification count if user is logged in
+      window.dispatchEvent(new CustomEvent('orderCompleted'));
+    } catch (error) {
+      console.log('Note: Could not trigger notification refresh');
+    }
+    
+    // Clear form and cart after successful payment
+    setCheckoutForm({
+      name: "",
+      lastname: "",
+      phone: "",
+      email: "",
+      company: "",
+      adress: "",
+      apartment: "",
+      city: "",
+      country: "",
+      postalCode: "",
+      orderNotice: "",
+    });
+    clearCart();
+    
+    toast.success("Payment completed successfully! Thank you for your order.");
+    
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  };
+
+  const handlePaymentError = (error: any) => {
+    console.error("❌ Payment error:", error);
+    toast.error("Payment failed. Please try again or contact support.");
+  };
+
+  const handlePaymentCancel = () => {
+    console.log("⚠️ Payment cancelled by user");
+    setShowPayment(false);
+    setPaymentSessionId(null);
+    toast("Payment cancelled. You can try again later.");
   };
 
   useEffect(() => {
@@ -537,10 +611,10 @@ const CheckoutPage = () => {
                   </div>
                   <div className="ml-3">
                     <h3 className="text-sm font-medium text-blue-800">
-                      Payment Information
+                      Secure Payment
                     </h3>
                     <div className="mt-2 text-sm text-blue-700">
-                      <p>Payment will be processed after order confirmation. You will be contacted for payment details.</p>
+                      <p>After confirming your order details, you'll be able to pay securely using our integrated payment system. We accept all major credit cards through Mastercard's secure payment gateway.</p>
                     </div>
                   </div>
                 </div>
@@ -751,11 +825,44 @@ const CheckoutPage = () => {
                 disabled={isSubmitting}
                 className="w-full rounded-md border border-transparent bg-customGray px-20 py-2 text-lg font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Processing Order..." : "Place Order"}
+                {isSubmitting ? "Processing Order..." : "Continue to Payment"}
               </button>
             </div>
           </div>
         </form>
+        
+        {/* Payment Interface */}
+        {showPayment && paymentSessionId && currentOrderId && (
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Complete Payment</h2>
+                  <button
+                    onClick={handlePaymentCancel}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                <HostedCheckout
+                  sessionId={paymentSessionId}
+                  orderData={{
+                    total: Math.round(total + total / 5 + 5),
+                    currency: 'USD',
+                    orderId: currentOrderId
+                  }}
+                  onPaymentComplete={handlePaymentComplete}
+                  onPaymentError={handlePaymentError}
+                  onPaymentCancel={handlePaymentCancel}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
