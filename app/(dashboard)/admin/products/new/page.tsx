@@ -138,7 +138,7 @@ const AddNewProduct = () => {
 	useEffect(() => {
 		fetchCategories();
 		fetchMerchants();
-	}, []);
+	}, [fetchCategories]);
 
 	return (
 		<div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">

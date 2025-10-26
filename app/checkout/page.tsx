@@ -411,7 +411,7 @@ const CheckoutPage = () => {
       toast.error("You don't have items in your cart");
       router.push("/cart");
     }
-  }, []);
+  }, [products.length, router]);
 
   return (
     <div className="bg-white">
@@ -614,7 +614,7 @@ const CheckoutPage = () => {
                       Secure Payment
                     </h3>
                     <div className="mt-2 text-sm text-blue-700">
-                      <p>After confirming your order details, you'll be able to pay securely using our integrated payment system. We accept all major credit cards through Mastercard's secure payment gateway.</p>
+                      <p>After confirming your order details, you&apos;ll be able to pay securely using our integrated payment system. We accept all major credit cards through Mastercard&apos;s secure payment gateway.</p>
                     </div>
                   </div>
                 </div>
