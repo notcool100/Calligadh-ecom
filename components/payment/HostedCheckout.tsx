@@ -50,6 +50,22 @@ const HostedCheckout: React.FC<HostedCheckoutProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [paymentMode, setPaymentMode] = useState<'embedded' | 'modal' | 'page'>('embedded');
 
+  const initializeCheckout = () => {
+    if (window.Checkout) {
+      try {
+        window.Checkout.configure({
+          session: {
+            id: sessionId
+          }
+        });
+        console.log('Checkout configured with session ID:', sessionId);
+      } catch (error) {
+        console.error('Error configuring checkout:', error);
+        toast.error('Payment system configuration failed');
+      }
+    }
+  };
+
   useEffect(() => {
     // Load the Hosted Checkout script
     const loadScript = () => {
@@ -64,12 +80,12 @@ const HostedCheckout: React.FC<HostedCheckoutProps> = ({
       script.setAttribute('data-error', 'handlePaymentError');
       script.setAttribute('data-cancel', 'handlePaymentCancel');
       script.setAttribute('data-complete', 'handlePaymentComplete');
-      
+
       script.onload = () => {
         setIsScriptLoaded(true);
         initializeCheckout();
       };
-      
+
       script.onerror = () => {
         toast.error('Failed to load payment system');
       };
@@ -95,7 +111,7 @@ const HostedCheckout: React.FC<HostedCheckoutProps> = ({
 
     (window as any).handlePaymentCancel = () => {
       console.log('Payment cancelled');
-      toast.info('Payment cancelled');
+      toast('Payment cancelled');
       onPaymentCancel();
       setIsModalOpen(false);
     };
@@ -106,23 +122,7 @@ const HostedCheckout: React.FC<HostedCheckoutProps> = ({
       delete (window as any).handlePaymentError;
       delete (window as any).handlePaymentCancel;
     };
-  }, [onPaymentComplete, onPaymentError, onPaymentCancel]);
-
-  const initializeCheckout = () => {
-    if (window.Checkout) {
-      try {
-        window.Checkout.configure({
-          session: {
-            id: sessionId
-          }
-        });
-        console.log('Checkout configured with session ID:', sessionId);
-      } catch (error) {
-        console.error('Error configuring checkout:', error);
-        toast.error('Payment system configuration failed');
-      }
-    }
-  };
+  }, [onPaymentComplete, onPaymentError, onPaymentCancel, initializeCheckout]);
 
   const handleEmbeddedPayment = () => {
     if (window.Checkout) {
