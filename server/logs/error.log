@@ -65,3 +65,4 @@
 ::ffff:127.0.0.1 - - [23/Oct/2025:16:57:54 +0000] "POST /api/payment/init-checkout HTTP/1.1" 404 50 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=x1ogqVJS userId=anonymous
 ::ffff:127.0.0.1 - - [23/Oct/2025:17:02:47 +0000] "POST /api/payment/init-checkout HTTP/1.1" 404 50 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=U6XUgZif userId=anonymous
 ::ffff:127.0.0.1 - - [23/Oct/2025:17:04:13 +0000] "POST /api/payment/init-checkout HTTP/1.1" 404 50 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=zTxkmoBX userId=anonymous
+::ffff:127.0.0.1 - - [26/Oct/2025:17:41:40 +0000] "PUT /api/orders/8dbafe5a-d20e-4978-a062-cf1aec07fc49 HTTP/1.1" 400 616 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" reqId=r3OpKNgO userId=anonymous
