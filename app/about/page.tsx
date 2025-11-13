@@ -49,44 +49,29 @@ const AboutPage = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Story</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From a small boutique to a fashion destination – discover the journey that shaped CalliGadh
+              Discover the passion and craftsmanship behind Calligadh
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
-                <FaGlobe className="text-white text-2xl" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Founded in 2020</h3>
-              <p className="text-gray-600 leading-relaxed">
-                CalliGadh was born from a vision to make high-quality fashion accessible to everyone.
-                Starting with a small collection of carefully curated pieces, we quickly became known
-                for our commitment to quality and style.
-              </p>
-            </div>
-
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="bg-gradient-to-br from-green-500 to-green-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
-                <FaUsers className="text-white text-2xl" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Growing Community</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Our community of fashion enthusiasts has grown exponentially. We listen to your feedback,
-                adapt to trends, and continuously expand our collection to meet your evolving style needs.
-              </p>
-            </div>
-
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="bg-gradient-to-br from-purple-500 to-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
-                <FaAward className="text-white text-2xl" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Award-Winning Service</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Recognized for our exceptional customer service and innovative approach to online fashion retail,
-                we&apos;re proud to be a trusted name in the industry.
-              </p>
-            </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              Founded in 2024, Calligadh Limited emerged from the shared passion and vision of a creative couple — a self-taught artist and a self-taught designer — united by their love for art, fashion, and craftsmanship.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              At Calligadh, artistry and design come together in perfect harmony. The husband brings imagination to life through sketches, designs, and bespoke art pieces, while the wife, a designer of clothing and jewelry, channels creativity into timeless fashion expressions. Each creation reflects their dedication, authenticity, and deep appreciation for beauty in every form.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              Every piece we craft carries a story — made with passion, love, and attention to detail. When you purchase from Calligadh, you are not just buying a product; you are investing in a piece of art, thoughtfully designed and carefully handcrafted.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              We take pride in supporting our roots and community. Many of our garments are proudly made in Nepal, creating meaningful employment and contributing to the local economy. Through this, we aspire to empower individuals and uplift the Nepalese community in a sustainable way.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              With every purchase, you become a part of our journey — helping us pursue our dream while supporting the craftsmanship and well-being of the people behind our creations.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Thank you for believing in our vision and being part of the Calligadh story.
+            </p>
           </div>
         </div>
       </section>
