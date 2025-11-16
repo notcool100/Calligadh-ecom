@@ -20,12 +20,15 @@ export const apiClient = {
   get: (endpoint: string, options?: RequestInit) => 
     apiClient.request(endpoint, { ...options, method: 'GET' }),
     
-  post: (endpoint: string, data?: any, options?: RequestInit) =>
-    apiClient.request(endpoint, {
+  post: (endpoint: string, data?: any, options?: RequestInit) => {
+    const isFormData = data instanceof FormData;
+    return apiClient.request(endpoint, {
       ...options,
       method: 'POST',
-      body: data ? JSON.stringify(data) : undefined,
-    }),
+      body: isFormData ? data : (data ? JSON.stringify(data) : undefined),
+      headers: isFormData ? { ...options?.headers } : { 'Content-Type': 'application/json', ...options?.headers },
+    });
+  },
     
   put: (endpoint: string, data?: any, options?: RequestInit) =>
     apiClient.request(endpoint, {

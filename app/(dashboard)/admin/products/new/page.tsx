@@ -93,23 +93,25 @@ const AddNewProduct = () => {
 		}
 	};
 
-	const uploadFile = async (file: any) => {
+	const uploadFile = async (file: any): Promise<string | null> => {
 		const formData = new FormData();
 		formData.append("uploadedFile", file);
 
 		try {
-			const response = await apiClient.post("/api/main-image", {
-				method: "POST",
-				body: formData,
-			});
+			const response = await apiClient.post("/api/main-image", formData);
 
 			if (response.ok) {
 				const data = await response.json();
+				return data.filename;
 			} else {
-				console.error("File upload unsuccessfull");
+				console.error("File upload unsuccessful");
+				toast.error("File upload failed");
+				return null;
 			}
 		} catch (error) {
-			console.error("Error happend while sending request:", error);
+			console.error("Error happened while sending request:", error);
+			toast.error("Upload error occurred");
+			return null;
 		}
 	};
 
@@ -120,7 +122,9 @@ const AddNewProduct = () => {
 				return res.json();
 			})
 			.then((data) => {
-				setCategories(data);
+				// Ensure data is always an array
+				const categoriesArray = Array.isArray(data) ? data : [];
+				setCategories(categoriesArray);
 				setProduct({
 					merchantId: product.merchantId || "",
 					title: "",
@@ -130,7 +134,7 @@ const AddNewProduct = () => {
 					mainImage: "",
 					description: "",
 					slug: "",
-					categoryId: data[0]?.id,
+					categoryId: categoriesArray[0]?.id || "",
 				});
 			});
 	};
@@ -138,7 +142,7 @@ const AddNewProduct = () => {
 	useEffect(() => {
 		fetchCategories();
 		fetchMerchants();
-	}, [fetchCategories]);
+	}, []);
 
 	return (
 		<div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
@@ -279,14 +283,18 @@ const AddNewProduct = () => {
 					<input
 						type="file"
 						className="file-input file-input-bordered file-input-lg w-full max-w-sm"
-						onChange={(e: any) => {
-							uploadFile(e.target.files[0]);
-							setProduct({ ...product, mainImage: e.target.files[0].name });
+						onChange={async (e: any) => {
+							if (e.target.files[0]) {
+								const filename = await uploadFile(e.target.files[0]);
+								if (filename) {
+									setProduct({ ...product, mainImage: filename });
+								}
+							}
 						}}
 					/>
 					{product?.mainImage && (
 						<Image
-							src={`/` + product?.mainImage}
+							src={`/${product.mainImage}`}
 							alt={product?.title}
 							className="w-auto h-auto"
 							width={100}
