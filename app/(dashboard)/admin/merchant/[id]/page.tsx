@@ -81,7 +81,7 @@ export default function MerchantDetailPage({
 
   useEffect(() => {
     fetchMerchant();
-  }, [id]); 
+  }, [id, fetchMerchant]);
 
 const handleInputChange = (
     e: React.ChangeEvent<
