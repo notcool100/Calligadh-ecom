@@ -39,7 +39,7 @@ async function uploadMainImage(req, res) {
         res.status(200).json({
             success: true,
             filename: uploadedFile.name,
-            path: `/uploads/${uploadedFile.name}`,
+            path: `/public/${uploadedFile.name}`,
             message: "Fajl je uspešno otpremljen"
         });
     });
