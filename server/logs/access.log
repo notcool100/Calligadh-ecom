@@ -5744,3 +5744,7 @@
 ::ffff:127.0.0.1 - - [17/Nov/2025:18:32:44 +0000] "GET /api/notifications/qn0F1L_X7iR7eSOH6j2AN/unread-count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0" reqId=ps0PAisD userId=anonymous
 ::ffff:127.0.0.1 - - [17/Nov/2025:18:32:47 +0000] "GET /api/users/email/admin@gmail.com HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0" reqId=iNAR4gRN userId=anonymous
 ::ffff:127.0.0.1 - - [17/Nov/2025:18:32:47 +0000] "GET /api/notifications/qn0F1L_X7iR7eSOH6j2AN/unread-count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0" reqId=P5NYKKfl userId=anonymous
+::1 - - [19/Nov/2025:05:16:30 +0000] "GET /api/products HTTP/1.1" 200 626 "-" "node" reqId=8zhYWRSZ userId=anonymous
+::ffff:127.0.0.1 - - [19/Nov/2025:05:23:08 +0000] "GET /api/products HTTP/1.1" 200 626 "-" "node" reqId=BWqknaQM userId=anonymous
+::1 - - [19/Nov/2025:05:23:46 +0000] "GET /api/products HTTP/1.1" 200 626 "-" "node" reqId=1LUZ6-cM userId=anonymous
+::1 - - [19/Nov/2025:05:24:12 +0000] "GET /api/products HTTP/1.1" 200 626 "-" "node" reqId=LxAe-SAy userId=anonymous
